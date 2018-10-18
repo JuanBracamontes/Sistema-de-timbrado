@@ -1,0 +1,18 @@
+.font-color{
+  color: white;
+}
+
+.font-color:hover{
+  /*color: white;*/
+  font-size: 20px;
+  color: #5b6574;
+  font-weight: bold;
+}
+
+.color-white{
+  color: white;
+}
+
+.end-session-color:hover{
+  color: #e74c3c;
+}

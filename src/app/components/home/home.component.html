@@ -1,0 +1,115 @@
+<section id="wrapper">
+
+  <div class="col-12" *ngIf="sucursal_seleccionada">
+    <div class="card">
+      <div class="card-body">
+        <h4 align="center" class="card-title">Pendientes de timbrar de {{sociedad}}</h4>
+        <div class="table-responsive">
+            <table class="table">
+              <thead style="width: 100%">
+              <tr>
+                <th>Ref.SAP</th>
+                <th>Fecha</th>
+                <th>Importe</th>
+                <th>Nombre del Cliente</th>
+                <!--<th>UUID del CFDI de Factura</th>-->
+                <!--<th>Seleccionar</th>-->
+              </tr>
+              </thead>
+              <tbody id="tabla-body" style="height: 100%;max-height: 500px;">
+              <tr *ngFor="let pago of datos;let i = index">
+                <td>{{pago.NumPago}}</td>
+                <!--<td>{{i}}</td>-->
+                <td>{{pago.FechaPago}}</td>
+                <td>${{pago.Total}}</td>
+                <td>{{pago.NombreCliente}}</td>
+                <!--<td>{{pago.UUID}}</td>-->
+                <td align="center">
+                  <div class="form-check">
+                    <input (click)="addPago(pago.NumPago,pago.UUID,i,pago.NombreCliente)" class="form-check-input" type="checkbox" id="{{i}}">
+                    <label for="{{i}}"></label>
+                  </div>
+                </td>
+              </tr>
+            </table>
+        </div>
+      </div>
+
+
+      <div class="row" style="margin-bottom: 10px;" *ngIf="folios.length > 0">
+        <div class="col-12" align="center">
+          <button class="btn btn-success waves-effect waves-light btn-rounded" (click)="timbrarPagos()">Timbrar</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!--Si no se ha seleccionado una sociedad-->
+  <div class="row" style="margin-top: 5%;" align="center" *ngIf="!sucursal_seleccionada">
+    <div class="col-12">
+      <h1>
+        Bienvenido {{nombre}}
+      </h1>
+    </div>
+    <br><br>
+  </div>
+
+  <div class="row" align="center">
+    <div class="col-12">
+      <span>
+        En esta seccion ponemos las herramientas a tu disposición para el analisis de la información.
+      </span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="row" align="center">
+    <div class="col-12">
+      <span>
+        Recordandote que si tienes alguna duda y/ó problema con el manejo de las herramientas, estamos para servirte en el area de sistemas.
+      </span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="row" align="center">
+    <div class="col-12">
+      <span>
+        <strong>
+          Ing. Juan Pablo Bracamonte Del Valle. 939.
+        </strong>
+      </span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="row" align="center">
+    <div class="col-12">
+      <span>
+        <strong>
+          Ing. Jose Wilfrido Acuña Meraz. 944.
+        </strong>
+      </span>
+    </div>
+  </div>
+
+  <br>
+  <br>
+
+  <div class="row" align="center">
+    <div class="col-12">
+      <h2>Seleccione Una Funcion a Realizar</h2>
+    </div>
+  </div>
+
+  <div class="row" align="center">
+    <div class="col-12">
+      <i class="fa fa-comments" aria-hidden="true" style="font-size: 100px;"></i>
+    </div>
+  </div>
+
+</section>

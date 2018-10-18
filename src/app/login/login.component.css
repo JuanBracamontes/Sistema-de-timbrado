@@ -1,0 +1,71 @@
+
+.login-register {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  height: 100%;
+  width: 100%;
+  padding: 10% 0;
+  position: fixed;
+}
+
+.login-box {
+  width: 400px;
+  margin: 0 auto;
+}
+
+.login-box .footer {
+  width: 100%;
+  left: 0px;
+  right: 0px;
+}
+
+.login-box .social {
+  display: block;
+  margin-bottom: 30px;
+}
+
+#recoverform {
+  display: none;
+}
+
+.login-sidebar {
+  padding: 0px;
+  margin-top: 0px;
+}
+
+.login-sidebar .login-box {
+  right: 0px;
+  position: absolute;
+  height: 100%;
+}
+
+.login-background{
+  background-color: #f4f6f9;
+  height: 100vh
+}
+
+.img-astral{
+  width: 30%;
+  height: 80%;
+}
+
+.card-login{
+  width: 400px;
+  height: 400px;
+  margin-top: 10%;
+  border-radius: 3%;
+  box-shadow: 0px 0px 18px -5px rgba(0,0,0,0.75);
+}
+
+.btn-ingresar{
+  margin-bottom: 15px;
+
+}
+
+.btn-fondo{
+  background-image: url("../../assets/images/background/degradado.png");
+  background-size: 50%;
+  border: white;
+}
+

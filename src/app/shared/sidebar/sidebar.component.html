@@ -1,0 +1,69 @@
+<aside class="left-sidebar">
+  <!-- Sidebar scroll-->
+  <div class="scroll-sidebar">
+    <!-- Sidebar navigation-->
+    <nav class="sidebar-nav">
+      <ul id="sidebarnav">
+        <li class="user-profile">
+          <a class="waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-account-circle"></i><span
+            class="hide-menu">{{name}}</span></a>
+        </li>
+        <li class="nav-devider"></li>
+        <li class="nav-small-cap" align="center" style="color: white">OPCIONES</li>
+       <!-- <li>
+          <a class="has-arrow waves-effect waves-dark" aria-expanded="false">
+            <i class="mdi mdi-account-multiple"></i>
+            <span class="hide-menu color-white">Sociedades</span>
+          </a>
+          <ul aria-expanded="false" class="collapse">
+            <li><a class="font-color" href="#" (click)="consultarHMO()">Hermosillo </a></li>
+            <li><a class="font-color" href="#" (click)="consultarTJ()">Tijuana</a></li>
+            <li><a class="font-color" href="#" (click)="consultarLP()">La paz</a></li>
+          </ul>
+        </li>   -->
+        <li>
+          <a class="has-arrow waves-effect waves-dark" aria-expanded="false">
+            <i class="fa fa-cogs"></i>
+            <span class="hide-menu color-white">Funciones</span>
+          </a>
+          <ul aria-expanded="false" class="collapse">
+            <li class="color-white" style="cursor: pointer" *ngIf="Facturacion == 1">
+              <a class="font-color" >Facturar</a>
+            </li>
+            <li class="color-white" style="cursor: pointer" *ngIf="Cancelacion == 1">
+              <a class="font-color" (click)="irCancelaciones()">Cancelar</a>
+            </li>
+            <li class="color-white" (click)="changeBoolean()" >
+              <a *ngIf="Timbrado == 1" class="has-arrow waves-effect waves-dark font-color" aria-expanded="false">
+                 Timbrar
+              </a>
+              <ul aria-expanded="false" ngClass="{{openOptions? 'colapse in animated flipInX':'colapse animated bounceOutUp'}}" style="cursor:pointer">
+
+                <li *ngIf="Hermosillo == '1'"><a class="font-color" (click)="goToSelectFunctions('Hermosillo')">Hermosillo </a></li>
+
+                <li *ngIf="LaPaz =='1'"><a class="font-color" (click)="goToSelectFunctions('LaPaz')">La paz</a></li>
+
+                <li *ngIf="Tijuana == '1'"><a class="font-color" (click)="goToSelectFunctions('Tijuana')">Tijuana</a></li>
+
+                <li *ngIf="Guadalajara =='1'"><a class="font-color" (click)="goToSelectFunctions('Guadalajara')">Guadalajara</a></li>
+
+                <li *ngIf="Monterrey =='1'"><a class="font-color" (click)="goToSelectFunctions('Monterrey')">Monterrey</a></li>
+
+                <li *ngIf="Noroeste == '1'"><a class="font-color" (click)="goToSelectFunctions('Noroeste')">Noroeste</a></li>
+
+              </ul>
+            </li>
+          </ul>
+        </li>
+
+        <li (click)="cerrar_sesion()">
+          <a class="waves-effect" href="#" aria-expanded="false"><i
+            class="fa fa-power-off end-session-color"></i><span class="hide-menu color-white">Salir</span></a>
+        </li>
+
+      </ul>
+    </nav>
+    <!-- End Sidebar navigation -->
+  </div>
+  <!-- End Sidebar scroll-->
+</aside>

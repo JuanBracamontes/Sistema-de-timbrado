@@ -1,0 +1,47 @@
+::-webkit-scrollbar{
+  width: 8px;
+  visibility: hidden;
+  /*background: transparent; !*Ver o no ver barra*!*/
+}
+
+::-webkit-scrollbar-thumb{
+  border-radius: 10px;
+  background: #a6a6a6;
+  box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+}
+::-webkit-scrollbar-track{
+  border-radius: 10px;
+  background-color:white ;
+}
+
+::-webkit-scrollbar:hover{
+  visibility: visible;
+}
+
+thead {
+  width: 500px;
+  overflow-x: auto;
+}
+
+tbody {
+  overflow-x: auto;
+  width: 100%;
+}
+td{
+  width: 17%
+}
+
+th{
+  width: 17%;
+}
+
+thead, tbody { display: block; }
+tbody {
+  height: 200px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+#tabla-body:hover{
+  overflow: auto;
+}

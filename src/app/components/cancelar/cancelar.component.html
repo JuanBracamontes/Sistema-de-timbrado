@@ -1,0 +1,106 @@
+<section id="wrapper">
+    <div class="card">
+
+      <div class="row" align="center" style="margin-top: 3%">
+        <div class="col-12">
+          <h1>Cancelaciones <i class="fa fa-ban" style="color: #e74c3c;" aria-hidden="true"></i></h1>
+        </div>
+      </div>
+
+
+      <div class="row" align="center" style="margin-top: 2%">
+        <div class="col-12">
+
+          <label >Seleccione un tipo de documento</label><br>
+          <div id="selectTipoDocumento" class="btn-group" data-toggle="buttons">
+            <label class="btn btn-primary" [ngClass]="{'active':isActive && tab == 1}" (click)="getTypeDocument('Facturas',1)">
+              <input type="radio" name="checkFacturas" id="Facturas"> Facturas
+            </label>
+            <label class="btn btn-primary" [ngClass]="{'active':isActive && tab == 2}" (click)="getTypeDocument('NCredito',2)">
+              <input type="radio" name="checkNCredito" id="NCredito" > Notas de Credito
+            </label>
+            <label class="btn btn-primary"  [ngClass]="{'active':isActive && tab == 3}" (click)="getTypeDocument('NCargo',3)">
+              <input type="radio" name="checkNCargo" id="NCargo"  > Notas de Cargo
+            </label>
+            <label class="btn btn-primary"  [ngClass]="{'active':isActive && tab == 4}" (click)="getTypeDocument('Pago',4)">
+              <input type="radio" name="checkNCargo" id="Pago"  > Pagos
+            </label>
+          </div>
+
+        </div>
+      </div>
+
+
+      <div class="row" style="margin-top: 2%;" >
+        <div class="col-12" align="center">
+          <form class="form-material">
+            <div class="form-group" style="display: inline-flex" >
+              <div class="col-10" >
+                <input type="text"  style="text-align: center"
+                       class="form-control"
+                       placeholder="Folio" name="folio"
+                       [(ngModel)]="Folio"
+                >
+              </div>
+
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="row" *ngIf="verMotivo">
+        <div class="col-12" align="center">
+          <form class="form-material">
+            <div class="form-group">
+             <div class="col-8" style="display:inline-block">
+               <input type="text" style="text-align: center;"
+                      class="form-control"
+                      placeholder="Ingrese el motivo de la cancelación"
+                      name="MotivoP"
+                      [(ngModel)]="Motivo"
+                      (keyup.enter)="goToValidateFields()"
+               >
+             </div>
+              <div class="col-1" style="display:inline-block">
+                <i class="fa fa-times" aria-hidden="true" style="font-size: 30px;color: #e55039;cursor:pointer" (click)="clearFields()"></i>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="row" *ngIf="datos.length > 0">
+        <div class="col-12">
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+              <tr>
+                <th>Folio SAP</th>
+                <th>Cancelado</th>
+                <th>Total</th>
+                <th>Cancelar</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let documento of datos" >
+                <td>{{documento.Folio}}</td>
+                <td>{{documento.Cancelado}}</td>
+                <td>{{documento.Total}}</td>
+                <td>
+                  <i style="color:#e55039;font-size: 30px;cursor: pointer"
+                       class="fa fa-times-circle" aria-hidden="true"
+                       (click)="goToCancel(documento.UUID)"
+                      >
+                  </i>
+
+                </td>
+              </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+</section>

@@ -1,0 +1,13 @@
+.active{
+  background-color: #3867d6!important;
+  border: #3867d6!important;
+}
+
+.btn-primary:hover{
+  background: #2c3e50;
+}
+
+.btn-primary{
+  background: #7f8c8d;
+  border: #7f8c8d;
+}

@@ -1,0 +1,129 @@
+<section id="wrapper">
+
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+
+          <div class="row" *ngIf="!opcion">
+            <div class="col-12" align="center">
+              <h2>{{sucursal}}</h2>
+            </div>
+          </div>
+
+          <div class="row" *ngIf="opcion">
+            <div class="col-12" align="center">
+              <h2>{{funcionSeleccionada}} {{sucursal}}
+                <i class="fa fa-refresh" style="cursor:pointer" aria-hidden="true"
+                   (click)="obtenerDatos(sucursal);borrarDatos()"
+                   data-toggle="tooltip" data-placement="right" title="Clic para actualizar folios"
+                >
+                </i>
+              </h2>
+            </div>
+          </div>
+
+          <div class="row" align="center" style="margin-top: 1%;">
+
+
+            <div class="col-3" *ngIf="Facturas == 1">
+              <span class="label label-success label-rounded label-st"
+                    (click)="obtenerFuncion('Facturas')">Facturas</span>
+            </div>
+
+            <div class="col-3" *ngIf="NotasCredito == 1">
+              <span class="label label-info label-rounded label-st"
+                    (click)="obtenerFuncion('Notas de credito')">Notas de Credito</span>
+            </div>
+
+            <div class="col-3" *ngIf="NotasCargo == 1">
+              <span class="label label-warning label-rounded label-st"
+                    (click)="obtenerFuncion('Notas de cargo')">Notas de Cargo</span>
+            </div>
+
+            <div class="col-3" *ngIf="Pagos == 1">
+              <span class="label  label-rounded label-st color-pagos"
+                    (click)="obtenerFuncion('Pagos')">Pagos</span>
+            </div>
+
+
+          </div>
+
+                              <!--Datetime Pickers -->
+
+          <!--<div class="row" style="margin-top: 20px" align="center">-->
+
+            <!--<div class="col-xs-12 col-12 col-md-4 form-group">-->
+              <!--<input type="text" placeholder="Fecha inicio" class="form-control" bsDatepicker>-->
+            <!--</div>-->
+            <!--<div class="col-xs-12 col-12 col-md-4 form-group">-->
+              <!--<input type="text" placeholder="Fecha Fin" class="form-control" bsDatepicker>-->
+            <!--</div>-->
+
+          <!--</div>-->
+
+          <div class="col-12" *ngIf="opcion">
+            <div class="card">
+              <div class="card-body">
+                <div class="table-responsive" style="overflow-x: hidden">
+                  <div class="row" [ngStyle]="{'background': colorTabla}">
+                    <div class="col-3">
+                      <h3 style="color:white;margin-left: 5px">Folio SAP</h3>
+                    </div>
+                    <div class="col-3">
+                      <h3 style="color:white">Fecha</h3>
+                    </div>
+                    <div class="col-3">
+                      <h3 style="color:white">Importe</h3>
+                    </div>
+                    <div class="col-3">
+                      <h3 style="color:white">Nombre del Cliente</h3>
+                    </div>
+                  </div>
+                  <table class="table table-hover">
+                    <!--<thead [ngStyle]="{'background': colorTabla}" class="w-100">-->
+                    <!--<tr>-->
+                      <!--<th style="color: white">Folio SAP</th>-->
+                      <!--<th style="color: white">Fecha</th>-->
+                      <!--<th style="color: white">Importe</th>-->
+                      <!--<th style="color: white">Nombre del Cliente</th>-->
+                    <!--</tr>-->
+                    <!--</thead>-->
+                    <tbody id="tabla-body" style="height: 100%;max-height: 400px;">
+                    <tr *ngFor="let pago of datos;let i = index">
+                      <td>
+
+                        <div style="display:inline-flex" class="form-check" >
+                          <input (click)="addPago(pago.NumPago,pago.Total)" class="form-check-input" type="checkbox" id="{{i}}">
+                          <label id="labelCheck" for="{{i}}"></label>
+                          {{pago.NumPago}}
+                        </div>
+
+                      </td>
+                      <td >{{pago.FechaPago}}</td>
+                      <td >${{pago.Total}}</td>
+                      <td align="center">{{pago.NombreCliente}}</td>
+
+                    </tr>
+                  </table>
+                </div>
+              </div>
+
+              <div class="row" style="margin-bottom: 30px;" *ngIf="folios.length > 0">
+
+                <div class="col-12" align="center">
+                  <button class="btn btn-success waves-effect waves-light btn-rounded" [disabled]="timbrando" (click)="timbrarPagos()">Timbrar</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
