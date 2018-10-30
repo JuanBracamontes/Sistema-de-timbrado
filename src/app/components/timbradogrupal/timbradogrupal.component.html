@@ -1,0 +1,80 @@
+<section id="wrapper">
+  <div class="card">
+
+    <div class="row" style="margin-top: 3%;" align="center">
+      <div class="col-12">
+        <h3>Timbrado de Pagos Por Cliente</h3>
+      </div>
+    </div>
+
+    <div class="row" style="margin-top: 2%;" >
+      <div class="col-12" align="center">
+        <form class="form-material">
+          <div class="form-group" style="display: inline-flex" >
+            <div class="col-10" >
+              <input type="text"  style="text-align: center"
+                     class="form-control"
+                     placeholder="RFC Del Cliente" name="folio"
+                    [(ngModel)]="rfc"
+                    (keyup.enter)="validateField()"
+              >
+            </div>
+
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="col-12" *ngIf="datos.length > 0">
+      <div class="card">
+        <div class="card-body">
+          <div class="table-responsive" style="overflow-x: hidden">
+            <div class="row" style="background-color: #1289A7">
+              <div class="col-3">
+                <h3 style="color:white;margin-left: 5px">Folio SAP</h3>
+              </div>
+              <div class="col-3" >
+                <h3 style="color:white;">Fecha</h3>
+              </div>
+              <div class="col-3">
+                <h3 style="color:white;">Importe</h3>
+              </div>
+              <div class="col-3" style="text-align: center;">
+                <h3 style="color:white;">Nombre del Cliente</h3>
+              </div>
+            </div>
+            <table class="table table-hover">
+              <tbody id="tabla-body" style="height: 100%;max-height: 400px;">
+              <tr *ngFor="let pago of datos;let i = index">
+                <td>
+
+                  <div style="display:inline-flex" class="form-check" >
+                    <input (click)="addPago(pago.NumPago)" class="form-check-input" type="checkbox" id="{{i}}">
+                    <label id="labelCheck" for="{{i}}"></label>
+                    {{pago.NumPago}}
+                  </div>
+
+                </td>
+                <td >{{pago.FechaPago}}</td>
+                <td >${{pago.Total}}</td>
+                <td align="center">{{pago.NombreCliente}}</td>
+
+              </tr>
+            </table>
+          </div>
+
+          <div class="row" style="margin-bottom: 30px;" *ngIf="folios.length > 0">
+
+            <div class="col-12" align="center">
+              <button class="btn btn-success waves-effect waves-light btn-rounded" [disabled]="timbrando" (click)="timbrarPagos()">Timbrar</button>
+            </div>
+          </div>
+
+        </div>
+
+
+      </div>
+    </div>
+
+  </div>
+</section>

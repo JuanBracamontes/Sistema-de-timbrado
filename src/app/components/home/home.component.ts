@@ -112,6 +112,10 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['Cancelaciones']);
   }
 
+  NavegarTimbradoGrupal(){
+    this.router.navigate(['TimbradoGrupal']);
+  }
+
 
 
 }

@@ -64,6 +64,29 @@ export class GlobalService {
     `  ;
   }
 
+  PagosQueryTimbradoGrupal(cliente:string){
+    return `
+            SELECT
+            ORCT.DocNum                       as 'NumPago',         --docnum del pago
+            CONVERT(char,ORCT.DocDate,103)    as 'FechaPago',         --fecha del pago
+            OINV.CardName                     as 'NombreCliente',     --Nombre del cliente en la factura
+            CONVERT(VARCHAR, CAST(SUM(RCT2.SumApplied) AS money), 1)as 'Total'
+            FROM ORCT
+            INNER JOIN RCT2 ON RCT2.DocNum   = ORCT.DocNum
+            INNER JOIN OINV ON OINV.DocEntry = RCT2.DocEntry
+            INNER JOIN OCRD ON OCRD.CardCode = OINV.CardCode
+            WHERE
+            ORCT.Canceled = 'N'     AND
+            RCT2.InvType = 13       AND
+            OINV.DocSubType <> 'DN' AND
+            (ORCT.U_Timbrado IS NULL OR ORCT.U_Timbrado <> 'Y')
+            AND RCT2.SumApplied > 1
+            AND OCRD.LicTradNum = '${cliente}'
+            AND ORCT.DocTotal>1 AND ORCT.Docdate between '08/28/2018' and GETDATE()
+            GROUP BY ORCT.DocNum,ORCT.DocDate,OINV.CardName  
+    `
+  }
+
   PermisosQuery(usuario:string){
     return `SELECT * FROM Usuarios WHERE Nombre = '${usuario}'`;
   }

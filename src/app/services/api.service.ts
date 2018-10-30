@@ -34,7 +34,6 @@ export class ApiService {
       consulta: consulta
     };
     let url = API_URL + '/ConsultaAstral10';
-    debugger;
     return new Promise((resolve, reject) => {
       this.http.post(url, data).subscribe((response: any) => {
         if (response.error) {
@@ -107,6 +106,20 @@ export class ApiService {
         }
       })
     });
+  }
+
+  timbrarGrupalAstral10(folios:any){
+    let dato = {
+      folios:folios
+    };
+    let url = API_URL + '/timbradoGrupalPagos';
+    return new Promise((resolve,reject)=>{
+      this.http.post(url,dato).subscribe((response:any)=>{
+        resolve(response);
+      },(error:any)=>{
+        reject (error);
+      })
+    })
   }
 
   timbrarNoroeste(folio: any) {

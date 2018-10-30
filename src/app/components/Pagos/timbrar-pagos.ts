@@ -7,8 +7,8 @@ import {BsDatepickerModule} from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-timbrar-pagos',
-  templateUrl: './timbar-pagos.html',
-  styleUrls: ['./timbar-pagos.css']
+  templateUrl: './timbrar-pagos.html',
+  styleUrls: ['./timbrar-pagos.css']
 })
 export class timbarPagosComponent implements OnInit {
 

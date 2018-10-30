@@ -8,6 +8,7 @@ import { HomeComponent } from './components/home/home.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { LoginComponent } from './login/login.component';
 import { ComponentesComponent } from './components/componentes.component';
+import { TimbradogrupalComponent } from './components/timbradogrupal/timbradogrupal.component';
 
 //Rutas
 import {APP_ROUTES} from './app.routes';
@@ -34,7 +35,8 @@ import { CancelarComponent } from './components/cancelar/cancelar.component';
     LoginComponent,
     ComponentesComponent,
     timbarPagosComponent,
-    CancelarComponent
+    CancelarComponent,
+    TimbradogrupalComponent
   ],
   imports: [
     BrowserModule,

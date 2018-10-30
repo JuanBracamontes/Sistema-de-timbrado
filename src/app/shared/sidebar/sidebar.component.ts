@@ -70,6 +70,10 @@ export class SidebarComponent{
     this.hc.NavegarCancelaciones();
   }
 
+  irTimbradoGrupal(){
+    this.hc.NavegarTimbradoGrupal();
+  }
+
   changeBoolean(){
     this.openOptions = !this.openOptions;
   }

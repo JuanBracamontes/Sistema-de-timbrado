@@ -5,6 +5,7 @@ import {HomeComponent} from './components/home/home.component';
 import {ComponentesComponent} from './components/componentes.component';
 import { timbarPagosComponent} from './components/Pagos/timbrar-pagos';
 import {CancelarComponent} from './components/cancelar/cancelar.component';
+import {TimbradogrupalComponent} from './components/timbradogrupal/timbradogrupal.component';
 
 const appRoutes: Routes = [
   {
@@ -13,6 +14,7 @@ const appRoutes: Routes = [
     children:[
       { path: 'home', component:HomeComponent },
       { path: 'timbrar/:sucursal', component:timbarPagosComponent },
+      { path: 'TimbradoGrupal',component:TimbradogrupalComponent},
       { path: 'Cancelaciones', component:CancelarComponent },
       { path:'', redirectTo: '/home', pathMatch:'full' }
     ]
