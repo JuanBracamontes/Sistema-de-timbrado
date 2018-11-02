@@ -20,6 +20,7 @@ export class SidebarComponent{
   name:any = sessionStorage.getItem('Nombre');
   Facturacion:number;
   Timbrado:number;
+  TimbradoGrupal:number;
   Cancelacion:number;
   Hermosillo:number;
   Tijuana:number;
@@ -51,6 +52,7 @@ export class SidebarComponent{
       this.Facturacion = response[0].Facturacion;
       this.Cancelacion = response[0].Cancelaciones;
       this.Timbrado = response[0].Timbrado;
+      this.TimbradoGrupal = response[0].TimbradoGrupal;
       this.Hermosillo = response[0].Hermosillo;
       this.Tijuana = response[0].Tijuana;
       this.LaPaz = response[0].LaPaz;

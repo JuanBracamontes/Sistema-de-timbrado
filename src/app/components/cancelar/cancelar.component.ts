@@ -76,21 +76,19 @@ export class CancelarComponent implements OnInit {
   goToCancel(uuid:string){
     this._alertService.deleteItem().then((response:any)=>{
       if(response){
-        /*this._apiService.cancelarDocumentoCFDI(uuid).then((response:any)=>{
-          this._alertService.successMesage('Cancelado Correctamente','');
-          this.datos = [];
+        this._apiService.cancelarDocumentoCFDI(uuid).then((response:any)=>{
+          let usr = sessionStorage.getItem('Nombre');
+          let consulta = this._GS.InsertDocumentosCancelados(this.Folio,this.Motivo,this.datos[0].UUID,usr);
+          this._apiService.insertarDetalles(consulta).then(solved =>{
+            this._alertService.successMesage('Cancelado Correctamente','');
+            this.datos = [];
+          }).catch(rejected =>{
+            this._alertService.errorMessage('No se inserto',rejected);
+          });
         }).catch((error:any)=>{
           this._alertService.errorMessage('Error al cancelar',error.mensaje);
           this.datos = [];
-        })*/
-        let usr = sessionStorage.getItem('Nombre');
-        let consulta = this._GS.InsertDocumentosCancelados(this.Folio,this.Motivo,this.datos[0].UUID,usr);
-        this._apiService.insertarDetalles(consulta).then(solved =>{
-          this._alertService.successMesage('Insertado correctamente','');
-        }).catch(rejected =>{
-          this._alertService.errorMessage('No se inserto',rejected);
-        });
-
+        })
       }
     })
   }
