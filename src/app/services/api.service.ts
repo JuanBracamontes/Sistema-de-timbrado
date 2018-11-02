@@ -199,13 +199,13 @@ export class ApiService {
     });
   }
 
-  cancelarDocumentoCFDI(uuid:string){
+  cancelarDocumentoCFDI(uuid:string,consulta:string){
     let dato = {
-      uuid:uuid
+      uuid:uuid,
+      consulta:consulta
     };
     let url = API_URL + '/Cancelar';
     return new Promise((resolve,reject)=>{
-      debugger;
       this.http.post(url,dato).subscribe((response:any)=>{
         if(response.error[0] == 'false'){
           let respuesta = {
