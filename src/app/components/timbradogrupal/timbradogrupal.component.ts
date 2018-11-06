@@ -10,10 +10,12 @@ import {ApiService} from '../../services/api.service';
 })
 export class TimbradogrupalComponent implements OnInit {
 
-  rfc:string = 'DIC860428M2A';
+  rfc:string = '';
   datos = [];
   folios = [];
   query:string = '';
+  allDataSelected:boolean = false;
+  TotalAcumulado:number = 0;
   constructor(private _GS:GlobalService,
               private alertService:AlertService,
               private _apiService:ApiService) { }
@@ -39,19 +41,28 @@ export class TimbradogrupalComponent implements OnInit {
     }
   }
 
-  addPago(folio: number) {
+  addPago(folio: number,monto:any) {
+    let pago = {
+      folio:folio,
+      monto:monto
+    };
 
     if (this.folios.length == 0) {
-      this.folios.push(folio);
+      this.TotalAcumulado = this.convertStringToNumber(pago.monto);
+      this.folios.push(pago);
     } else {
       for (let i = 0; i < this.folios.length; i++) {
-        if (this.folios[i] == folio) {
+        if (this.folios[i].folio == folio) {
+          this.TotalAcumulado =  this.TotalAcumulado - this.convertStringToNumber(this.folios[i].monto);
           this.folios.splice(i, 1);
           return;
         }
       }
-      this.folios.push(folio);
+
+      this.TotalAcumulado += this.convertStringToNumber(pago.monto);
+      this.folios.push(pago);
     }
+
   }
 
   timbrarPagos(){
@@ -91,6 +102,28 @@ export class TimbradogrupalComponent implements OnInit {
   borrarDatos(){
     this.datos = [];
     this.folios = [];
+  }
+
+  selectAll(){
+    this.allDataSelected = !this.allDataSelected;
+    if(this.allDataSelected){
+      for(let i=0; i<this.datos.length;i++){
+        this.folios.push(this.datos[i].NumPago);
+        this.TotalAcumulado += this.convertStringToNumber(this.datos[i].Total);
+      }
+    }else{
+      this.folios = [];
+      this.TotalAcumulado = 0;
+    }
+  }
+
+  formatNumber(numero:any){
+    return numero.toFixed(2);
+  }
+
+  convertStringToNumber(stringNumber:any){
+     stringNumber = parseFloat(stringNumber.replace(/,/g, ''));
+     return stringNumber;
   }
 
 

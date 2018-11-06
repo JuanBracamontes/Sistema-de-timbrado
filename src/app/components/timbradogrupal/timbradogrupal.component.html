@@ -31,6 +31,16 @@
       </div>
     </div>
 
+    <div class="row" align="center" *ngIf="datos.length > 0">
+      <div class="col-12" *ngIf="!allDataSelected">
+        <button  class="btn btn-warning" (click)="selectAll()">Seleccionar todos</button>
+      </div>
+       <div class="col-12" *ngIf="allDataSelected">
+        <button  class="btn btn-danger" (click)="selectAll()">Deseleccionar todos</button>
+      </div>
+
+    </div>
+
     <div class="col-12" *ngIf="datos.length > 0">
       <div class="card">
         <div class="card-body">
@@ -55,7 +65,7 @@
                 <td>
 
                   <div style="display:inline-flex" class="form-check" >
-                    <input (click)="addPago(pago.NumPago)" class="form-check-input" type="checkbox" id="{{i}}">
+                    <input (click)="addPago(pago.NumPago,pago.Total)" class="form-check-input" [checked]="allDataSelected" type="checkbox" id="{{i}}">
                     <label id="labelCheck" for="{{i}}"></label>
                     {{pago.NumPago}}
                   </div>
@@ -69,18 +79,20 @@
             </table>
           </div>
 
-          <div class="row" style="margin-bottom: 30px;" *ngIf="folios.length > 0">
+          <div class="row" style="margin-bottom: 30px;" *ngIf="TotalAcumulado > 0" align="center">
+            <div class="col-12">
+              <span>Total por pagar: ${{formatNumber(TotalAcumulado)}}</span>
+            </div>
+          </div>
 
+          <div class="row" style="margin-bottom: 30px;" *ngIf="folios.length > 0">
             <div class="col-12" align="center">
               <button class="btn btn-success waves-effect waves-light btn-rounded" [disabled]="timbrando" (click)="timbrarPagos()">Timbrar</button>
             </div>
           </div>
-
         </div>
-
 
       </div>
     </div>
-
   </div>
 </section>
