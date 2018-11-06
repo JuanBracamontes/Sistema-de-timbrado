@@ -21,8 +21,6 @@ export class ApiService {
           reject(response.mensaje);
         } else {
           sessionStorage.setItem('Nombre', response[0].Nombre);
-          sessionStorage.setItem('UsuarioWindows', response[0].UsuarioWindows);
-          sessionStorage.setItem('IP', response[0].IP);
           resolve('Se ha logeado correctamente');
         }
       })
@@ -167,37 +165,6 @@ export class ApiService {
     });
   }
 
-  insertarUuidPrinted(consulta: string) {
-    let dato = {
-      consulta: consulta
-    };
-    let url = API_URL + '/UpdatePrinted';
-    return new Promise((resolve, reject) => {
-      this.http.post(url, dato).subscribe((response: any) => {
-        if (response.error) {
-          reject(response.mensaje);
-        } else {
-          resolve();
-        }
-      })
-    });
-  }
-
-  insertarUuidPrintedNoro(consulta:string){
-    let dato = {
-      consulta:consulta
-    };
-    let url = API_URL + '/UpdatePrintedNoro';
-    return new Promise((resolve,reject)=>{
-      this.http.post(url,dato).subscribe((response:any)=>{
-        if(response.error){
-          reject(response.mensaje);
-        }else{
-          resolve();
-        }
-      })
-    });
-  }
 
   cancelarDocumentoCFDI(uuid:string,consulta:string){
     let dato = {

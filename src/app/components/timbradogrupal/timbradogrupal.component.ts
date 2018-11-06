@@ -10,9 +10,10 @@ import {ApiService} from '../../services/api.service';
 })
 export class TimbradogrupalComponent implements OnInit {
 
-  rfc:string = 'IMM861215HH0';
+  rfc:string = 'DIC860428M2A';
   datos = [];
   folios = [];
+  query:string = '';
   constructor(private _GS:GlobalService,
               private alertService:AlertService,
               private _apiService:ApiService) { }
@@ -21,8 +22,8 @@ export class TimbradogrupalComponent implements OnInit {
   }
 
   getQueryTimbradoGrupal(){
-      let query = this._GS.PagosQueryTimbradoGrupal(this.rfc);
-      this._apiService.consultaBdAstral10(query).then((response:any)=>{
+      this.query = this._GS.PagosQueryTimbradoGrupal(this.rfc);
+      this._apiService.consultaBdAstral10(this.query).then((response:any)=>{
         this.datos = response;
         console.log(this.datos);
       },(error:any)=>{
@@ -56,9 +57,10 @@ export class TimbradogrupalComponent implements OnInit {
   timbrarPagos(){
     let foliosConvertidos = this.convertDocnums();
     this._apiService.timbrarGrupalAstral10(foliosConvertidos).then((resolve:any)=>{
-      console.log(resolve);
+      this.folios = [];
+      this.obtenerDatos();
     }).catch((error:any)=>{
-      console.error(error);
+      this.alertService.errorMessage('Error al timbrar',error);
     })
   }
 
@@ -74,6 +76,21 @@ export class TimbradogrupalComponent implements OnInit {
         cadena += folio;
     }
     return cadena;
+  }
+
+  obtenerDatos(){
+    if(this.query != ''){
+      this._apiService.consultaBdAstral10(this.query).then((response: any) => {
+        this.datos = response;
+      }, (error: any) => {
+        console.log(error);
+      });
+    }
+  }
+
+  borrarDatos(){
+    this.datos = [];
+    this.folios = [];
   }
 
 

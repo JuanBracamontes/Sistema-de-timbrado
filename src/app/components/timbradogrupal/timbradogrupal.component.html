@@ -2,9 +2,15 @@
   <div class="card">
 
     <div class="row" style="margin-top: 3%;" align="center">
-      <div class="col-12">
-        <h3>Timbrado de Pagos Por Cliente</h3>
-      </div>
+        <div class="col-12" align="center">
+          <h2>Timbrado Grupal
+            <i  class="fa fa-refresh" *ngIf="this.query!=''" style="cursor:pointer" aria-hidden="true"
+               (click)="obtenerDatos();borrarDatos()"
+               data-toggle="tooltip" data-placement="right" title="Clic para actualizar folios"
+            >
+            </i>
+          </h2>
+        </div>
     </div>
 
     <div class="row" style="margin-top: 2%;" >
