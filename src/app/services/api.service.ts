@@ -176,7 +176,7 @@ export class ApiService {
     let url = API_URL + '/Cancelar';
     return new Promise((resolve,reject)=>{
       this.http.post(url,dato).subscribe((response:any)=>{
-        if(response.error == 'false'){
+        if(response.error == false){
           let respuesta = {
             error: true,
             mensaje : response.mensaje[0]
