@@ -96,8 +96,8 @@ export class GlobalService {
     return `INSERT INTO Detalles_Pagos VALUES (GETDATE(),'${DocNum}','N','${UUID}',${Monto},'${Usuario}','${Sucursal}')`;
   }
 
-  InsertDocumentosCancelados(DocNum:string,motivo:string,uuid:string,usuario:string){
-    return `INSERT INTO DocumentosCancelados VALUES (${DocNum},'${motivo}',GETDATE(),'${uuid}','${usuario}')`
+  InsertDocumentosCancelados(DocNum:string,motivo:string,uuid:string,usuario:string,tipoDocumento:any){
+    return `INSERT INTO DocumentosCancelados VALUES (${DocNum},'${motivo}',GETDATE(),'${uuid}','${usuario}','${tipoDocumento}')`;
   }
 
   CancelarDocumentosQuery(documento:any,tabla:any,folio:any){

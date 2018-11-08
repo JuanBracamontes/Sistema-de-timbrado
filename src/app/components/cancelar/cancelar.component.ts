@@ -101,7 +101,7 @@ export class CancelarComponent implements OnInit {
     this._alertService.deleteItem().then((response:any)=>{
       if(response){
         let usr = sessionStorage.getItem('Nombre');
-        let consulta = this._GS.InsertDocumentosCancelados(this.Folio,this.Motivo,this.datos[0].UUID,usr);
+        let consulta = this._GS.InsertDocumentosCancelados(this.Folio,this.Motivo,this.datos[0].UUID,usr,this.tipoDocumento);
         this._apiService.cancelarDocumentoCFDI(uuid,consulta,this.queryActualizaPrinted).then((response:any)=>{
           if(response.error){
             this._alertService.successMesage('Cancelado Correctamente','');
