@@ -47,7 +47,7 @@ export class GlobalService {
             ORCT.DocNum                       as 'NumPago',         --docnum del pago
             CONVERT(char,ORCT.DocDate,103)    as 'FechaPago',         --fecha del pago
             OINV.CardName                     as 'NombreCliente',     --Nombre del cliente en la factura
-            CONVERT(VARCHAR, CAST(SUM(RCT2.SumAppliedFC) AS money), 1)as 'Total'
+            CONVERT(VARCHAR, CAST(SUM(RCT2.SumApplied) AS money), 1)as 'Total'
             FROM ORCT
             INNER JOIN RCT2 ON RCT2.DocNum   = ORCT.DocNum
             INNER JOIN OINV ON OINV.DocEntry = RCT2.DocEntry
@@ -96,10 +96,6 @@ export class GlobalService {
     return `INSERT INTO Detalles_Pagos VALUES (GETDATE(),'${DocNum}','N','${UUID}',${Monto},'${Usuario}','${Sucursal}')`;
   }
 
-  InsertUuidPrintedQuery(uuid:string,docnum:any){
-    return `UPDATE ORCT SET U_UUID = '${uuid}', U_Timbrado = 'Y' where DocNum = '${docnum}' `;
-  }
-
   InsertDocumentosCancelados(DocNum:string,motivo:string,uuid:string,usuario:string){
     return `INSERT INTO DocumentosCancelados VALUES (${DocNum},'${motivo}',GETDATE(),'${uuid}','${usuario}')`
   }
@@ -110,8 +106,8 @@ export class GlobalService {
           SELECT 
           DocNum as Folio,
           Printed AS Impreso, 
-          CANCELED as Cancelado, 
-          DocTotal as Total,
+          CardName as Cliente, 
+          CONVERT(VARCHAR, CAST(DocTotal AS money), 1)as Total,
           U_UUID as UUID 
           FROM ${tabla} 
           WHERE DocNum = '${folio}' 
@@ -122,8 +118,8 @@ export class GlobalService {
           SELECT 
           DocNum as Folio,
           Printed AS Impreso, 
-          CANCELED as Cancelado, 
-          DocTotal as Total,
+          CardName as Cliente,  
+          CONVERT(VARCHAR, CAST(DocTotal AS money), 1)as Total,
           U_UUID as UUID 
           FROM ${tabla} 
           WHERE DocNum = '${folio}' 
@@ -135,14 +131,24 @@ export class GlobalService {
             SELECT 
             DocNum as Folio,
             Printed AS Impreso, 
-            CANCELED as Cancelado, 
-            DocTotal as Total,
+            CardName as Cliente,  
+            CONVERT(VARCHAR, CAST(DocTotal AS money), 1)as Total,
             U_UUID as UUID 
             FROM ${tabla} 
             WHERE DocNum = '${folio}' 
             AND U_UUID <> 'NULL'
       `
     }
+  }
+
+  UpdatePrintedQuery(docnum:any,tabla:string){
+    let query:string;
+    if(tabla == 'OINV'){
+      query = `UPDATE ${tabla} SET PRINTED = 'Y' WHERE DocNum ='${docnum}' AND DocSubType = 'DN'`;
+    }else if(tabla == 'ORIN'){
+      query = `UPDATE ${tabla} SET PRINTED = 'Y' WHERE DOCNUM = '${docnum}'`;
+    }
+    return query;
   }
 
 

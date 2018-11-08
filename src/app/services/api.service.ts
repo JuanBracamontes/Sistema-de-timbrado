@@ -166,22 +166,24 @@ export class ApiService {
   }
 
 
-  cancelarDocumentoCFDI(uuid:string,consulta:string){
+  cancelarDocumentoCFDI(uuid:string,consulta:string,queryActualizaPrinted:any){
     let dato = {
       uuid:uuid,
-      consulta:consulta
+      consulta:consulta,
+      consultaPrinted:queryActualizaPrinted
     };
+
     let url = API_URL + '/Cancelar';
     return new Promise((resolve,reject)=>{
       this.http.post(url,dato).subscribe((response:any)=>{
-        if(response.error[0] == 'false'){
+        if(response.error == 'false'){
           let respuesta = {
             error: true,
             mensaje : response.mensaje[0]
           };
           reject(respuesta);
         }else{
-          if(response.mensaje[0] == 'UUID Previamente cancelado'){
+          if(response.mensaje[0] == 'Previamente cancelado'){
             let respuesta = {
               error: true,
               mensaje : response.mensaje[0]

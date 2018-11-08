@@ -113,7 +113,7 @@ export class HomeComponent implements OnInit {
   }
 
   NavegarTimbradoGrupal(){
-    this.router.navigate(['TimbradoGrupal']);
+    this.router.navigate(['TimbradoGrupal'])
   }
 
 

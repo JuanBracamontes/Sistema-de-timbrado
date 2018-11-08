@@ -30,7 +30,7 @@
         </div>
       </div>
 
-
+      <!--campo del folio para cancelar ante el sat-->
       <div class="row" style="margin-top: 2%;" >
         <div class="col-12" align="center">
           <form class="form-material">
@@ -40,6 +40,29 @@
                        class="form-control"
                        placeholder="Folio" name="folio"
                        [(ngModel)]="Folio"
+                >
+              </div>
+
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!--Campo para actualizar el printed-->
+      <div class="row" style="margin-top: 1%;" *ngIf="campoPrinted" >
+        <div class="col-12" align="center">
+          <form class="form-material">
+            <div class="form-group" style="display: inline-flex" >
+              <div class="col-10" >
+                <input *ngIf="tipoDocumento == 'Factura'" type="text"  style="text-align: center"
+                       class="form-control"
+                       placeholder="Nota de credito" name="Nc"
+                       [(ngModel)]="FolioActualizar"
+                >
+                <input *ngIf="tipoDocumento == 'NCredito'" type="text"  style="text-align: center"
+                       class="form-control"
+                       placeholder="Nota de cargo" name="Ncar"
+                       [(ngModel)]="FolioActualizar"
                 >
               </div>
 
@@ -76,7 +99,7 @@
               <thead>
               <tr>
                 <th>Folio SAP</th>
-                <th>Cancelado</th>
+                <th>Cliente</th>
                 <th>Total</th>
                 <th>Cancelar</th>
               </tr>
@@ -84,8 +107,8 @@
               <tbody>
               <tr *ngFor="let documento of datos" >
                 <td>{{documento.Folio}}</td>
-                <td>{{documento.Cancelado}}</td>
-                <td>{{documento.Total}}</td>
+                <td>{{documento.Cliente}}</td>
+                <td>${{documento.Total}}</td>
                 <td>
                   <i style="color:#e55039;font-size: 30px;cursor: pointer"
                        class="fa fa-times-circle" aria-hidden="true"
