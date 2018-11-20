@@ -30,7 +30,7 @@ export class SidebarComponent{
   Noroeste:number;
 
   openOptions:boolean  = false;
-
+  cancelarMenu:boolean = false;
   constructor(private router:Router,
               private _GS:GlobalService,
               private broadcaster:Broadcaster,
@@ -72,12 +72,21 @@ export class SidebarComponent{
     this.hc.NavegarCancelaciones();
   }
 
+  irCanceladasEnProceso(){
+    this.hc.NavegarCancelacionesEnProceso();
+  } 
+
+
   irTimbradoGrupal(){
     this.hc.NavegarTimbradoGrupal();
   }
 
   changeBoolean(){
     this.openOptions = !this.openOptions;
+  }
+  
+  showCancelarMenu(){
+    this.cancelarMenu = !this.cancelarMenu;
   }
 
 }

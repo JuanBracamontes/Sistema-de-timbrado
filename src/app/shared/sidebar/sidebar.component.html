@@ -10,17 +10,7 @@
         </li>
         <li class="nav-devider"></li>
         <li class="nav-small-cap" align="center" style="color: white">OPCIONES</li>
-       <!-- <li>
-          <a class="has-arrow waves-effect waves-dark" aria-expanded="false">
-            <i class="mdi mdi-account-multiple"></i>
-            <span class="hide-menu color-white">Sociedades</span>
-          </a>
-          <ul aria-expanded="false" class="collapse">
-            <li><a class="font-color" href="#" (click)="consultarHMO()">Hermosillo </a></li>
-            <li><a class="font-color" href="#" (click)="consultarTJ()">Tijuana</a></li>
-            <li><a class="font-color" href="#" (click)="consultarLP()">La paz</a></li>
-          </ul>
-        </li>   -->
+
         <li>
           <a class="has-arrow waves-effect waves-dark" aria-expanded="false">
             <i class="fa fa-cogs"></i>
@@ -30,14 +20,18 @@
             <li class="color-white" style="cursor: pointer" *ngIf="Facturacion == 1">
               <a class="font-color" >Facturar</a>
             </li>
-            <li class="color-white" style="cursor: pointer" *ngIf="Cancelacion == 1">
-              <a class="font-color" (click)="irCancelaciones()">Cancelar</a>
+            <li class="color-white" style="cursor: pointer" *ngIf="Cancelacion == 1" (click)="showCancelarMenu()">
+              <a  class="font-color has-arrow waves-effect waves-dark" aria-expanded="false">Cancelaciones</a>
+              <ul aria-expanded="false" ngClass="{{cancelarMenu? 'colapse in animated flipInX':''}}">
+                <li><a class="font-color" (click)="irCancelaciones()">Cancelar</a></li>
+                <li><a class="font-color" (click)="irCanceladasEnProceso()">Canceladas En proceso</a></li>
+              </ul>
             </li>
             <li class="color-white" (click)="changeBoolean()" >
               <a *ngIf="Timbrado == 1" class="has-arrow waves-effect waves-dark font-color" aria-expanded="false">
                  Timbrar
               </a>
-              <ul aria-expanded="false" ngClass="{{openOptions? 'colapse in animated flipInX':'colapse animated bounceOutUp'}}" style="cursor:pointer">
+              <ul aria-expanded="false" ngClass="{{openOptions? 'colapse in animated flipInX':''}}" style="cursor:pointer">
 
                 <li *ngIf="Hermosillo == '1'"><a class="font-color" (click)="goToSelectFunctions('Hermosillo')">Hermosillo </a></li>
 

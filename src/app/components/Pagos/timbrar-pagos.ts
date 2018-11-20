@@ -147,13 +147,7 @@ export class timbarPagosComponent implements OnInit {
         setTimeout(()=>{
           this.apiService.timbrarAstral10(this.folios[i].folio).then((resolve: any) => {
             this.obtenerDatos(this.sucursal);
-            /*let updateUuidConsulta = this._GS.InsertUuidPrintedQuery(resolve.U_UUID[0],this.folios[i].folio);
-            this.apiService.insertarUuidPrinted(updateUuidConsulta).then(()=>{
-            },(error:any)=>{
-              console.log(error)
-            });*/
-            debugger;
-         let consultaDetalles = this._GS.InsertDetallePagosQuery(resolve.response[0], resolve.U_UUID[0],this.folios[i].monto,this.usuario,this.sucursal);
+         let consultaDetalles = this._GS.InsertDetallePagosQuery(this.folios[i].folio, resolve.U_UUID[0],this.folios[i].monto,this.usuario,this.sucursal);
          this.apiService.insertarDetalles(consultaDetalles).then(() => {
            }).catch((err: any) => {
              this.alertService.errorMessage('Error al insertar', err);
@@ -173,14 +167,7 @@ export class timbarPagosComponent implements OnInit {
         setTimeout(()=>{
           this.apiService.timbrarNoroeste(this.folios[i].folio).then((resolve: any) => {
             this.obtenerDatos(this.sucursal);
-            /*let updateUuidConsulta = this._GS.InsertUuidPrintedQuery(resolve.U_UUID[0],this.folios[i].folio);
-            this.apiService.insertarUuidPrintedNoro(updateUuidConsulta).then(()=>{
-            },(error:any)=>{
-              console.log(error)
-            });*/
-            debugger;
-            let consultaDetalles = this._GS.InsertDetallePagosQuery(resolve.response[0], resolve.U_UUID[0],this.folios[i].monto,this.usuario,this.sucursal);
-            debugger;
+            let consultaDetalles = this._GS.InsertDetallePagosQuery(this.folios[i].folio, resolve.U_UUID[0],this.folios[i].monto,this.usuario,this.sucursal);
             this.folios = [];
             this.apiService.insertarDetalles(consultaDetalles).then(() => {
             }).catch((err: any) => {

@@ -9,6 +9,8 @@ import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { LoginComponent } from './login/login.component';
 import { ComponentesComponent } from './components/componentes.component';
 import { TimbradogrupalComponent } from './components/timbradogrupal/timbradogrupal.component';
+import { CancelarComponent } from './components/cancelar/cancelar.component';
+import { CancelacionesEPComponent } from './components/cancelaciones-ep/cancelaciones-ep.component';
 
 //Rutas
 import {APP_ROUTES} from './app.routes';
@@ -23,7 +25,6 @@ import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import {Broadcaster} from '../assets/js/broadcaster';
 import {timbarPagosComponent} from './components/Pagos/timbrar-pagos';
 import {BsDatepickerModule} from 'ngx-bootstrap';
-import { CancelarComponent } from './components/cancelar/cancelar.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { CancelarComponent } from './components/cancelar/cancelar.component';
     ComponentesComponent,
     timbarPagosComponent,
     CancelarComponent,
-    TimbradogrupalComponent
+    TimbradogrupalComponent,
+    CancelacionesEPComponent
   ],
   imports: [
     BrowserModule,
