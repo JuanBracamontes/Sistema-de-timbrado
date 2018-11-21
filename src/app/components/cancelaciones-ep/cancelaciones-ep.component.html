@@ -1,3 +1,48 @@
-<p>
-  cancelaciones-ep works!
-</p>
+<div class="wrapper">
+  <div class="card">
+    <div class="row" align="center" style="margin-top: 3%;">
+      <div class="col-12">
+        <h3>Cancelaciones en Proceso</h3>
+      </div>
+    </div>
+
+    <div class="table-responsive" style="overflow-x: hidden">
+      <div class="row" style="background-color: #353b48">
+        <div class="col-3">
+          <h3 style="color:white;margin-left: 5px">Folio SAP</h3>
+        </div>
+        <div class="col-3" >
+          <h3 style="color:white;">Tipo Dcto.</h3>
+        </div>
+        <div class="col-3">
+          <h3 style="color:white;">Fecha</h3>
+        </div>
+        <div class="col-3" style="text-align: center;">
+          <h3 style="color:white;">UUID</h3>
+        </div>
+      </div>
+      <table class="table table-hover">
+        <tbody id="tabla-body" style="height: 100%;max-height: 400px;">
+        <tr *ngFor="let DoctoCancelado of datos;let i = index">
+          <td>
+            <div style="display:inline-flex" class="form-check" >
+              <input (click)="addFolio(DoctoCancelado.Folio,DoctoCancelado.Motivo)" class="form-check-input"  type="checkbox" id="{{i}}">
+              <label id="labelCheck" for="{{i}}"></label>
+              {{DoctoCancelado.Folio}}
+            </div>
+          </td>
+          <td>{{DoctoCancelado.TipoDocumento}}</td>
+          <td>{{fechaFormato(DoctoCancelado.Fecha)}}</td>
+          <td>{{DoctoCancelado.U_UUID}}</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="row" style="margin-bottom: 30px;" *ngIf="folios.length > 0">
+      <div class="col-12" align="center">
+        <button class="btn btn-outline-info waves-effect waves-light btn-rounded" (click)="actualizarCampo()">Actualizar</button>
+      </div>
+    </div>
+
+  </div>
+</div>

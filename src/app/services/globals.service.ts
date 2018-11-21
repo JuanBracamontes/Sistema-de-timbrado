@@ -18,6 +18,21 @@ export class GlobalService {
     }
   }
 
+  convertDocnums(folios){
+    debugger;
+    let cadena = "";
+    let folio = "";
+    for(let i=0; i< folios.length;i++){
+      if(i +1 == folios.length){
+        folio = "'"+ folios[i].folio+"'";
+      }else{
+        folio = "'"+ folios[i].folio+"'"+",";
+      }
+      cadena += folio;
+    }
+    return cadena;
+  }
+
   PagosQuery(rango1:string,rango2:string):string{
     return `
             SELECT
@@ -156,6 +171,16 @@ export class GlobalService {
     return query;
   }
 
+  obtenerCancelacionesPendientes(){
+    return `SELECT * FROM DocumentosCancelados WHERE EnProceso = 'S'`;
+  }
 
+  actualizarCampoEnProceso(folio:any,motivo:string){
+    return `UPDATE DocumentosCancelados SET EnProceso = 'N' WHERE Folio = '${folio}' and Motivo = '${motivo}'`;
+  }
 
 }
+
+
+
+

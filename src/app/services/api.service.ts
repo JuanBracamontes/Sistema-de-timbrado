@@ -201,6 +201,19 @@ export class ApiService {
     })
   }
 
+  actualizaDbDefault(query:string){
+    let dato = {
+      consulta:query
+    };
+    let url = API_URL + '/UpdateDetalles';
+    return new Promise((resolve,reject)=>{
+        this.http.post(url,dato).subscribe((response:any)=>{
+          resolve(response.mensaje);
+        },(error:any)=>{
+          reject(error.mensaje);
+      })
+    })
+  }
 
 
 

@@ -22,7 +22,7 @@
             </li>
             <li class="color-white" style="cursor: pointer" *ngIf="Cancelacion == 1" (click)="showCancelarMenu()">
               <a  class="font-color has-arrow waves-effect waves-dark" aria-expanded="false">Cancelaciones</a>
-              <ul aria-expanded="false" ngClass="{{cancelarMenu? 'colapse in animated flipInX':''}}">
+              <ul aria-expanded="false" ngClass="{{cancelarMenu? 'colapse in animated flipInX':'collapse'}}">
                 <li><a class="font-color" (click)="irCancelaciones()">Cancelar</a></li>
                 <li><a class="font-color" (click)="irCanceladasEnProceso()">Canceladas En proceso</a></li>
               </ul>
