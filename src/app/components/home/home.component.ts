@@ -25,10 +25,10 @@ export class HomeComponent implements OnInit {
                private broadcaster:Broadcaster,
                private apiService:ApiService) {
 
-    if(this._GS.validar_campos(this.nombre)){
+    if(!this._GS.checkuserLogged()){
       this.router.navigate(['login']);
-    }else {
-        console.clear();
+    }else{
+      console.clear();
     }
 
   }
@@ -107,6 +107,11 @@ export class HomeComponent implements OnInit {
   NavegarTimbrado(suc:string){
     this.router.navigate(['timbrar',suc]);
   }
+
+  NavegarTabla(){
+    this.router.navigate(['Tabla']);
+  }
+
 
   NavegarCancelaciones(){
     this.router.navigate(['Cancelaciones']);

@@ -1,0 +1,164 @@
+
+<link href="assets/css/style2.css"  type="text/css">
+<link href="assets/css/colors/default-dark.css" id="theme"  type="text/css">
+<!-- You can change the theme colors from here -->
+
+<section id="wrapper">
+
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+
+          <div class="row" *ngIf="!opcion">
+            <div class="col-12" align="center">
+              <h2>{{sucursal}}</h2>
+            </div>
+          </div>
+
+          <div class="row" *ngIf="opcion">
+            <div class="col-12" align="center">
+              <h2>{{funcionSeleccionada}} {{sucursal}}
+                <i class="fa fa-refresh" style="cursor:pointer" aria-hidden="true"
+                   (click)="obtenerDatos(sucursal);borrarDatos()"
+                   data-toggle="tooltip" data-placement="right" title="Clic para actualizar folios"
+                >
+                </i>
+              </h2>
+            </div>
+          </div>
+
+          <div class="row" align="center" style="margin-top: 1%;">
+
+
+            <div class="col-3" *ngIf="Facturas == 1">
+              <span class="label label-success label-rounded label-st"
+                    (click)="obtenerFuncion('Facturas')">Facturas</span>
+            </div>
+
+            <div class="col-3" *ngIf="NotasCredito == 1">
+              <span class="label label-info label-rounded label-st"
+                    (click)="obtenerFuncion('Notas de credito')">Notas de Credito</span>
+            </div>
+
+            <div class="col-3" *ngIf="NotasCargo == 1">
+              <span class="label label-warning label-rounded label-st"
+                    (click)="obtenerFuncion('Notas de cargo')">Notas de Cargo</span>
+            </div>
+
+            <div class="col-3" *ngIf="Pagos == 1">
+              <span class="label  label-rounded label-st color-pagos"
+                    (click)="obtenerFuncion('Pagos')">Pagos</span>
+            </div>
+
+
+          </div>
+
+                              <!--Datetime Pickers -->
+
+          <!--<div class="row" style="margin-top: 20px" align="center">-->
+
+            <!--<div class="col-xs-12 col-12 col-md-4 form-group">-->
+              <!--<input type="text" placeholder="Fecha inicio" class="form-control" bsDatepicker>-->
+            <!--</div>-->
+            <!--<div class="col-xs-12 col-12 col-md-4 form-group">-->
+              <!--<input type="text" placeholder="Fecha Fin" class="form-control" bsDatepicker>-->
+            <!--</div>-->
+
+
+          <body class="fix-header card-no-border fix-sidebar" style="margin-top: 2%;">
+
+
+          <div class="row" *ngIf="opcion && datos.length>0" >
+            <div class="col-12" style="margin-top: 1%" >
+                    <div class="row">
+                      <div class="col-3">
+                        <form class="form-material">
+                        <div class="form-group">
+                         <input type="text" class="form-control" placeholder="Buscar Folio"  (keyup)="searchDocument($event)" >
+                        </div>
+                        </form>
+                      </div>
+                      <div class="col-5" align="center" *ngIf="!selectAll">
+                        <button class="btn btn-outline btn-rounded"
+                                [ngStyle]="{background:colorTabla}"
+                                style="color:white; font-weight: bold"
+                                (click)="seleccionarTodos()">
+                          Seleccionar Todos
+                        </button>
+                      </div>
+                      <div class="col-5" align="center" *ngIf="selectAll">
+                        <button class="btn  btn-danger btn-rounded"
+                                style="color:white; font-weight: bold"
+                                (click)="seleccionarTodos()">
+                          Deseleccionar Todos
+                        </button>
+                      </div>
+
+                    </div>
+                    <table id="miTabla1" style="margin-bottom: 0px" class="display nowrap table">
+                      <tbody id="tablaheader" class="ancho" [ngStyle]="{'background': colorTabla}">
+                        <tr align="left">
+                          <td class="cw table-titles table-tittle-small">Folio SAP</td>
+                          <td class="cw table-titles table-tittle-small">Fecha</td>
+                          <td class="cw table-titles table-tittle-small">Importe</td>
+                          <td class="cw table-titles table-tittle-large">Cliente</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <div class="tabla2">
+                      <table id="miTabla2" class="table table-style table-hover table-bordered" cellspacing="0" width="100%">
+
+                        <tbody>
+                          <tr *ngFor="let Documento of datos;let i = index">
+                            <td style="width: 10%;">
+                              <div style="display:inline-flex" class="form-check" >
+                                <input (click)="addDcto(Documento.Folio,Documento.Total)" class="form-check-input"
+                                       [checked]="selectAll"
+                                       type="checkbox" id="{{i}}">
+                                <label id="labelCheck" for="{{i}}"></label>
+                                {{Documento.Folio}}
+                              </div>
+                            </td>
+                            <td style="width: 10%;">{{Documento.Fecha}}</td>
+                            <td style="width: 10%;">${{Documento.Total}}</td>
+                            <td style="width: 70%;">{{Documento.NombreCliente}}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+
+                    <div class="row" style="margin-bottom: 30px;" *ngIf="folios.length > 0">
+                      <div class="col-12" align="center">
+                        <button class="btn btn-success waves-effect waves-light btn-rounded" [disabled]="timbrando" (click)="switchearBotonTimbrado()">Timbrar</button>
+                      </div>
+                    </div>
+              </div>
+            </div>
+
+          <div style="margin-top: 5%; margin-bottom:5%" class="row" *ngIf="datos.length <= 0 && opcion && datosCargados" >
+
+            <div class="col-1"></div>
+            <div class="offset-1 col-10">
+              <div class="alert alert-warning" role="alert" align="center">
+                NO HAY FACTURAS POR TIMBRAR DE LA SUCURSAL {{strUpper()}}
+              </div>
+            </div>
+            <div class="col-1"></div>
+
+          </div>
+
+
+
+
+
+          </body>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</section>

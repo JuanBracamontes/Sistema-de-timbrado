@@ -37,7 +37,11 @@ export class SidebarComponent{
               private apiService:ApiService,
               private hc:HomeComponent) {
 
-    this.obtenerPermisos();
+      if(!this._GS.checkuserLogged()){
+        this.router.navigate(['login']);
+      }else{
+        this.obtenerPermisos();
+      }
 
   }
 
@@ -74,7 +78,11 @@ export class SidebarComponent{
 
   irCanceladasEnProceso(){
     this.hc.NavegarCancelacionesEnProceso();
-  } 
+  }
+
+  irTabla(){
+    this.hc.NavegarTabla();
+  }
 
 
   irTimbradoGrupal(){

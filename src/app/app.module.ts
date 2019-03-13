@@ -11,6 +11,7 @@ import { ComponentesComponent } from './components/componentes.component';
 import { TimbradogrupalComponent } from './components/timbradogrupal/timbradogrupal.component';
 import { CancelarComponent } from './components/cancelar/cancelar.component';
 import { CancelacionesEPComponent } from './components/cancelaciones-ep/cancelaciones-ep.component';
+import {timbrarComponent} from './components/Timbrado/timbrar';
 
 //Rutas
 import {APP_ROUTES} from './app.routes';
@@ -23,7 +24,6 @@ import {HttpClientModule} from '@angular/common/http';
 import {AlertService} from './services/sweetalert';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import {Broadcaster} from '../assets/js/broadcaster';
-import {timbarPagosComponent} from './components/Pagos/timbrar-pagos';
 import {BsDatepickerModule} from 'ngx-bootstrap';
 
 
@@ -35,7 +35,7 @@ import {BsDatepickerModule} from 'ngx-bootstrap';
     SidebarComponent,
     LoginComponent,
     ComponentesComponent,
-    timbarPagosComponent,
+    timbrarComponent,
     CancelarComponent,
     TimbradogrupalComponent,
     CancelacionesEPComponent

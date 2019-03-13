@@ -3,8 +3,6 @@ import {HttpClient} from '@angular/common/http';
 import {UserData} from '../interfaces/user';
 import {API_URL} from './url.api';
 import {GlobalService} from './globals.service';
-import {Observable} from 'rxjs';
-import {reject} from 'q';
 
 @Injectable()
 export class ApiService {
@@ -23,6 +21,10 @@ export class ApiService {
           sessionStorage.setItem('Nombre', response[0].Nombre);
           resolve('Se ha logeado correctamente');
         }
+      },(er:any)=>{
+          if(er.error){
+            reject('Ocurrio un error inesperado');
+          }
       })
     })
   }
@@ -73,6 +75,37 @@ export class ApiService {
         }
       })
     });
+
+  }
+
+  timbrarPacifico(folio:any,archivo:string,tipoDocumento:string){
+    debugger;
+    let dato = {
+      folio : folio,
+      TipoDcto: tipoDocumento
+    };
+    let url = API_URL + '/' + archivo;
+    return new Promise((resolve,reject)=>{
+      this.http.post(url,dato).subscribe((response:any)=>{
+        if(response.error){
+          let error = {
+            mensaje:response.mensaje,
+            folio:response.folio
+          };
+          reject(error);
+        }else{
+          resolve(response);
+        }
+      },(err:any)=>{
+        if(err.error){
+          let error = {
+            mensaje:err.message,
+            folio:folio
+          };
+          reject(error);
+        }
+      })
+    })
 
   }
 
@@ -178,10 +211,10 @@ export class ApiService {
       this.http.post(url,dato).subscribe((response:any)=>{
         if(response.error == false){
           let respuesta = {
-            error: true,
+            error: false,
             mensaje : response.mensaje[0]
           };
-          reject(respuesta);
+          resolve(respuesta);
         }else{
           if(response.mensaje[0] == 'Previamente cancelado'){
             let respuesta = {
@@ -189,12 +222,18 @@ export class ApiService {
               mensaje : response.mensaje[0]
             };
             reject(respuesta);
-          }else{
+          }else if(response.mensaje[0] == 'En proceso'){
             let respuesta = {
               error: false,
               mensaje : response.mensaje[0]
             };
             resolve(respuesta);
+          }else {
+            let respuesta = {
+              error: true,
+              mensaje : response.mensaje[0]
+            };
+            reject(respuesta);
           }
         }
       })
@@ -213,6 +252,28 @@ export class ApiService {
           reject(error.mensaje);
       })
     })
+  }
+
+
+  timbrarNotaCredito(query: any){
+    let obj = {
+      consulta:query
+    };
+    let url = API_URL + '/timbradoNotaCredito';
+    return new Promise((resolve,reject)=>{
+      this.http.post(url,obj).subscribe((response:any)=>{
+        //ENTRA CUANDO NO OCURRIO NINGUN PROBLEMA
+        if(response.error){
+          reject(response.mensaje);
+        }else{
+          resolve(response);
+        }
+      },(err:any)=>{
+        //ENTRA CUANDO OCURRIO UN ERROR INESPERADO
+        reject(err);
+      })
+    })
+
   }
 
 

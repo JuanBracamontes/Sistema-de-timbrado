@@ -25,7 +25,12 @@ export class CancelacionesEPComponent implements OnInit {
       this.datos = response;
       console.log(response);
     }).catch((error:any)=>{
-      console.log(error);
+      if(error == 'No existen registros'){
+            this.folios = [];
+            this.datos = [];
+      }else{
+        console.error(error);
+      }
     })
   }
 

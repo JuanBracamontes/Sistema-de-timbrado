@@ -26,6 +26,25 @@
               "src/styles.css"
             ],
             "scripts": [
+              /*"src/dataTables/jquery.js",
+              "src/dataTables/jquery.min.js",
+              "src/dataTables/bootstrap.js",
+              "src/dataTables/perfect-scrollbar.jquery.min.js",
+              "src/dataTables/perfect-scrollbar.jquery.js",
+              "src/dataTables/jquery.dataTables.js",
+              "src/dataTables/dataTables.bootstrap.js",
+              "src/dataTables/jQuery.style.switcher.js",
+              "src/dataTables/jquery.dataTables.min.js",
+              "src/dataTables/dataTables.buttons.min.js",
+              "src/dataTables/buttons.flash.min.js",
+              "src/dataTables/buttons.html5.min.js",
+              "src/dataTables/buttons.print.min.js",
+              "src/dataTables/vfs_fonts.js",
+              "src/dataTables/pdfmake.min.js",
+              "src/dataTables/pdfmake.js",
+              "src/dataTables/jszip.min.js",
+              "src/dataTables/sidebar-nav.min.js",
+              "src/dataTables/sidebarmenu.js"*/
 
             ]
           },
@@ -76,7 +95,10 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": [],
+            "scripts": [
+
+
+            ],
             "assets": [
               "src/favicon.ico",
               "src/assets"

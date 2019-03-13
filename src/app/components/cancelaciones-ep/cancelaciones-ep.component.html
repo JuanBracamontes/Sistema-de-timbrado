@@ -6,7 +6,7 @@
       </div>
     </div>
 
-    <div class="table-responsive" style="overflow-x: hidden">
+    <div class="table-responsive" style="overflow-x: hidden" *ngIf="datos.length > 0">
       <div class="row" style="background-color: #353b48">
         <div class="col-3">
           <h3 style="color:white;margin-left: 5px">Folio SAP</h3>
@@ -37,6 +37,19 @@
         </tr>
       </table>
     </div>
+
+    <div class="row" *ngIf="datos.length <= 0" style="margin-top:2%">
+     
+        <div class="col-1"></div>
+        <div class="offset-1 col-10">
+            <div class="alert alert-warning" role="alert" align="center">
+                NO HAY CANCELACIONES EN PROCESO POR EL MOMENTO
+              </div>
+        </div>
+        <div class="col-1"></div>
+     
+    </div>
+    
 
     <div class="row" style="margin-bottom: 30px;" *ngIf="folios.length > 0">
       <div class="col-12" align="center">

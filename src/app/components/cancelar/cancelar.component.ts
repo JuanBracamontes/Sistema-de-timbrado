@@ -83,11 +83,14 @@ export class CancelarComponent implements OnInit {
   getQueryCancelDocument(documento:string,tabla:string,folio:string){
 
     if(this.campoPrinted){
+      debugger;
         if(this.tipoDocumento = 'Factura'){
           this.queryActualizaPrinted = this._GS.UpdatePrintedQuery(this.FolioActualizar,'ORIN');
         }else if(this.tipoDocumento = 'NCredito'){
           this.queryActualizaPrinted = this._GS.UpdatePrintedQuery(this.FolioActualizar,'OINV');
         }
+        debugger;
+        console.log(this.queryActualizaPrinted);
     }
     let query = this._GS.CancelarDocumentosQuery(documento,tabla,folio);
     this._apiService.consultaBdAstral10(query).then((response:any)=>{
@@ -103,7 +106,7 @@ export class CancelarComponent implements OnInit {
         let usr = sessionStorage.getItem('Nombre');
         let consulta = this._GS.InsertDocumentosCancelados(this.Folio,this.Motivo,this.datos[0].UUID,usr,this.tipoDocumento);
         this._apiService.cancelarDocumentoCFDI(uuid,consulta,this.queryActualizaPrinted).then((response:any)=>{
-          if(response.error){
+          if(!response.error){
             this._alertService.successMesage('Cancelado Correctamente','');
             this.datos = [];
           }else{

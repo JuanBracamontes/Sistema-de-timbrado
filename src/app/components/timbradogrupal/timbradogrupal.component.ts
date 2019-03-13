@@ -29,7 +29,9 @@ export class TimbradogrupalComponent implements OnInit {
         this.datos = response;
         console.log(this.datos);
       },(error:any)=>{
-        this.alertService.errorMessage('Error en la consulta',error);
+          this.datos = [];
+          this.folios = [];
+          this.alertService.errorMessage('Error en la consulta',error);
       });
   }
 
@@ -78,13 +80,24 @@ export class TimbradogrupalComponent implements OnInit {
   convertDocnums(){
     let cadena = "";
     let folio = "";
-    for(let i=0; i<this.folios.length;i++){
-        if(i +1 == this.folios.length){
-            folio = "'"+this.folios[i]+"'";
-        }else{
-            folio = "'"+this.folios[i]+"'"+",";
-        }
-        cadena += folio;
+      if(!this.allDataSelected){
+          for(let i=0; i<this.folios.length;i++){
+              if(i +1 == this.folios.length){
+                  folio = "'"+this.folios[i].folio+"'";
+              }else{
+                  folio = "'"+this.folios[i].folio+"'"+",";
+              }
+              cadena += folio;
+          }
+      }else if(this.allDataSelected){
+        for(let i=0; i<this.folios.length;i++){
+          if(i +1 == this.folios.length){
+              folio = "'"+this.folios[i]+"'";
+          }else{
+              folio = "'"+this.folios[i]+"'"+",";
+          }
+          cadena += folio;
+      }
     }
     return cadena;
   }

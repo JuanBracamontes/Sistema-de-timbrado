@@ -57,7 +57,6 @@ export class LoginComponent implements OnInit {
   }
 
   validar_campos(usr: UserData) {
-
     if (usr.usuario == '') {
       this.alertService.errorMessage('Campo vacio', 'Llena el campo usuario')
     } else if (usr.clave == '') {
